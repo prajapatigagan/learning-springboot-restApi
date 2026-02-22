@@ -3,26 +3,26 @@ package com.example.learningRESTAPIs.controller;
 import com.example.learningRESTAPIs.dto.StudentDto;
 import com.example.learningRESTAPIs.entity.Student;
 import com.example.learningRESTAPIs.repository.StudentRepository;
+import com.example.learningRESTAPIs.service.StudentServices;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class StudentController {
 
-    private final StudentRepository studentRepository;
+    private final StudentServices studentServices;
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
 
-    @GetMapping("/student")
-    public List<Student> getStudent(){
-        return studentRepository.findAll();
+    @GetMapping("/students")
+    public List<StudentDto> getAllStudents(){
+        return studentServices.getAllStudent();
     }
-    @GetMapping("/student/{id}")
-    public StudentDto getStudentById(){
-        return new StudentDto(4l,"ramu","ramu@gmail.com");
-    }
+    @GetMapping("/students/{id}")
+    public String getStudentById(@PathVariable Long id ){
+        return studentServices.getStudentById();
 }
