@@ -9,6 +9,6 @@ public class StudentController {
 
     @GetMapping("/student")
     public StudentDto getStudent(){
-        return new StudentDto(4L,"Gagan","gagan@gmail.com");
+        return new StudentDto(4L,"Gagan","gagan1@gmail.com");
     }
 }
