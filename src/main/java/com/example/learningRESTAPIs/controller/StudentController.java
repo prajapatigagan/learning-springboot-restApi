@@ -32,4 +32,16 @@ public class StudentController {
     public ResponseEntity<StudentDto> createNewStudent(@RequestBody AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentServices.createNewStudent(addStudentRequestDto));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+
+        studentServices.deleteStudentById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id,@RequestBody AddStudentRequestDto addStudentRequestDto)
+    {
+        return ResponseEntity.ok(studentServices.updateStudent(id,addStudentRequestDto));
+    }
 }
