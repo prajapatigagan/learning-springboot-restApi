@@ -5,12 +5,15 @@ import com.example.learningRESTAPIs.dto.StudentDto;
 import com.example.learningRESTAPIs.entity.Student;
 import com.example.learningRESTAPIs.repository.StudentRepository;
 import com.example.learningRESTAPIs.service.StudentServices;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class StudentController {
         return ResponseEntity.ok(studentServices.getStudentById(id));
     }
     @PostMapping
-    public ResponseEntity<StudentDto> createNewStudent(@RequestBody AddStudentRequestDto addStudentRequestDto){
+    public ResponseEntity<StudentDto> createNewStudent(@RequestBody @Valid AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentServices.createNewStudent(addStudentRequestDto));
     }
     @DeleteMapping("/{id}")
@@ -43,5 +46,9 @@ public class StudentController {
     public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id,@RequestBody AddStudentRequestDto addStudentRequestDto)
     {
         return ResponseEntity.ok(studentServices.updateStudent(id,addStudentRequestDto));
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id,@RequestBody Map<String,Object> updates){
+        return ResponseEntity.ok(studentServices.updatePartialStudent(id,updates));
     }
 }

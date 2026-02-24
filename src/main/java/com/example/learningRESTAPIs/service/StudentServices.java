@@ -3,6 +3,7 @@ package com.example.learningRESTAPIs.service;
 import com.example.learningRESTAPIs.dto.AddStudentRequestDto;
 import com.example.learningRESTAPIs.dto.StudentDto;
 import java.util.List;
+import java.util.Map;
 
 public interface StudentServices {
 
@@ -17,4 +18,6 @@ public interface StudentServices {
     void deleteStudentById(Long id);
 
     StudentDto updateStudent(Long id, AddStudentRequestDto addStudentRequestDto);
+
+    StudentDto updatePartialStudent(Long id, Map<String,Object> updates);
 }
